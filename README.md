@@ -22,3 +22,7 @@ npm i @apollo/client @fortawesome/fontawesome-svg-core @fortawesome/free-brands-
 router : 측정 URL로 가게 되면 components를 보여줌
 
 Switch : 한 번에 딱 하나의 route만 render 시켜줌
+
+# 8.5
+
+react.js 에서 만약 어떤 것의 상태의 변화가 있다면, 그건 component를 다시 render하도록 만듦
