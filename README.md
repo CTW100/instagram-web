@@ -1,9 +1,10 @@
 # Instaclone Web
 
 - [x] Router
-- [ ] Authentication
-- [ ] Atch.
+- [x] Authentication
+- [x] Atch.
 - [ ] Styles
+- [ ] Log In
 
 # 8.0
 
@@ -26,3 +27,8 @@ Switch : 한 번에 딱 하나의 route만 render 시켜줌
 # 8.5
 
 react.js 에서 만약 어떤 것의 상태의 변화가 있다면, 그건 component를 다시 render하도록 만듦
+
+# 8.6
+
+#8.5에서 사용한 것은 매우 bad. 로그인/로그아웃을 굉장히 많은 곳에서 실행할 수 있어야 되는데 그럴때마다 props를 전달하는 것은 매우 나쁨. reactive variables로 그 문제를 해결할 것임.
+reactive variable : 기본적으로 반응하고 변하는 variable
