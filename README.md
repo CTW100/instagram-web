@@ -1,6 +1,6 @@
 # Instaclone Web
 
-- [ ] Router
+- [x] Router
 - [ ] Authentication
 - [ ] Atch.
 - [ ] Styles
@@ -16,3 +16,9 @@
 # 8.1
 
 npm i @apollo/client @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome graphql react-helmet-async react-hook-form react-router-dom styled-components
+
+# 8.3
+
+router : 측정 URL로 가게 되면 components를 보여줌
+
+Switch : 한 번에 딱 하나의 route만 render 시켜줌
