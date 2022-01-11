@@ -3,8 +3,8 @@
 - [x] Router
 - [x] Authentication
 - [x] Atch.
-- [ ] Styles
-- [ ] Log In
+- [x] Styles
+- [ ] Log In / Sign Up
 
 # 8.0
 
@@ -36,3 +36,7 @@ reactive variable : 기본적으로 반응하고 변하는 variable
 # 8.8
 
 theme provider는 기본적으로 테마를 제공해 줌
+
+# 8.9
+
+npm i styled-reset
