@@ -76,3 +76,7 @@ PropTypes는 전달받은 데이터의 유효성을 검증하기 위해서 다�
 npm install react-hook-form@6.15.1
 
 내용많음. 그냥 강의 한 번 더 보는 게 나음.
+
+# 10.9
+
+Apollo client를 통해 backend와 frontend를 연결함
