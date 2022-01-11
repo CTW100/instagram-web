@@ -48,3 +48,24 @@ npm i styled-reset
 
 1. 스타일 컴포넌트에서 상속(extend)하는 법
 2. 스타일 컴포넌트 안의 HTML 태그를 타게팅하는 법
+
+# 9.6
+
+여러분의 앱이 커짐에 따라 타입 검사를 활용하면 많은 버그를(bug) 잡을 수 있습니다. 특정 애플리케이션에서는 전체 애플리케이션의 타입 검사를 위해 Flow 또는 TypeScript와 같은 JavaScript 도구(Extensions)를 사용할 수 있습니다. 이러한 것들을 사용하지 않더라도 React는 내장된 타입 검사 기능들을 가지고 있습니다. 컴포넌트의 props에 타입 검사를 하려면 다음과 같이 특별한 프로퍼티인 propTypes를 선언할 수 있습니다.
+
+예시)
+import PropTypes from 'prop-types';
+
+class Greeting extends React.Component {
+render() {
+return (
+<h1>Hello, {this.props.name}</h1>
+);
+}
+}
+
+Greeting.propTypes = {
+name: PropTypes.string
+};
+
+PropTypes는 전달받은 데이터의 유효성을 검증하기 위해서 다양한 유효성 검사기(Validator)를 내보냅니다. 아래 예시에서는 PropTypes.string을 사용하게 될 것입니다. prop에 유효하지 않은 값이 전달 되었을 때, 경고문이 JavaScript 콘솔을 통해 보일 것입니다. propTypes는 성능상의 이유로 개발 모드(Development mode) 에서만 확인될 것입니다.
