@@ -59,6 +59,7 @@ import PropTypes from 'prop-types';
 class Greeting extends React.Component {
 render() {
 return (
+
 <h1>Hello, {this.props.name}</h1>
 );
 }
@@ -69,3 +70,9 @@ name: PropTypes.string
 };
 
 PropTypes는 전달받은 데이터의 유효성을 검증하기 위해서 다양한 유효성 검사기(Validator)를 내보냅니다. 아래 예시에서는 PropTypes.string을 사용하게 될 것입니다. prop에 유효하지 않은 값이 전달 되었을 때, 경고문이 JavaScript 콘솔을 통해 보일 것입니다. propTypes는 성능상의 이유로 개발 모드(Development mode) 에서만 확인될 것입니다.
+
+# 10.7
+
+npm install react-hook-form@6.15.1
+
+내용많음. 그냥 강의 한 번 더 보는 게 나음.

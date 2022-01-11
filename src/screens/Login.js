@@ -4,6 +4,7 @@ import {
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useForm } from 'react-hook-form';
 import AuthLayout from '../components/auth/AuthLayout';
 import BottomBox from '../components/auth/BottomBox';
 import Button from '../components/auth/Button';
@@ -22,6 +23,14 @@ const FacebookLogin = styled.div`
 `;
 
 function Login() {
+  const { register, handleSubmit } = useForm();
+  const onSubmitValid = (data) => {
+    console.log(data);
+  };
+  const onSubmitInvalid = (data) => {
+    console.log(data);
+  };
+
   return (
     <AuthLayout>
       <PageTitle title='Login' />
@@ -29,9 +38,19 @@ function Login() {
         <div>
           <FontAwesomeIcon icon={faInstagram} size='3x' />
         </div>
-        <form>
-          <Input type='text' placeholder='Username' />
-          <Input type='password' placeholder='Password' />
+        <form onSubmit={handleSubmit(onSubmitValid, onSubmitInvalid)}>
+          <Input
+            ref={register({ required: 'Username is required.', minLength: 5 })}
+            name='username'
+            type='text'
+            placeholder='Username'
+          />
+          <Input
+            ref={register({ required: 'Password is required.' })}
+            name='password'
+            type='password'
+            placeholder='Password'
+          />
           <Button type='submit' value='Log in' />
         </form>
         <Separator />
