@@ -5,6 +5,9 @@
 - [x] Atch.
 - [x] Styles
 - [ ] Log In / Sign Up
+- [ ] Feed
+- [ ] Profile
+- [ ] See Hashtag
 
 # 8.0
 
@@ -40,3 +43,8 @@ theme provider는 기본적으로 테마를 제공해 줌
 # 8.9
 
 npm i styled-reset
+
+# 10.1
+
+1. 스타일 컴포넌트에서 상속(extend)하는 법
+2. 스타일 컴포넌트 안의 HTML 태그를 타게팅하는 법
