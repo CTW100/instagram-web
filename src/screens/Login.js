@@ -6,6 +6,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
+import { logUserIn } from '../apollo';
 import AuthLayout from '../components/auth/AuthLayout';
 import BottomBox from '../components/auth/BottomBox';
 import Button from '../components/auth/Button';
@@ -35,33 +36,54 @@ const LOGIN_MUTATION = gql`
 `;
 
 function Login() {
-  const { register, handleSubmit, errors, formState, getValues, setError } =
-    useForm({
-      mode: 'onChange',
-    });
+  const {
+    register,
+    handleSubmit,
+    errors,
+    formState,
+    getValues,
+    setError,
+    clearErrors, // clearErrors 는 모든 error들을 사라지게 만들거나 내가 선택한 error들을 없애줌
+  } = useForm({
+    mode: 'onChange',
+  });
+
   const onCompleted = (data) => {
     const {
       login: { ok, error, token },
     } = data;
+
     if (!ok) {
-      setError('result', {
+      return setError('result', {
         message: error,
       });
     }
+    if (token) {
+      logUserIn(token);
+    }
   };
+
   const [login, { loading }] = useMutation(LOGIN_MUTATION, {
     // loading : mutation이 잘 전송됐는지 확인, data는 mutation 종료 이후에 Data가 있는지, called: mutation이 호출된 건지 여부 확인
     onCompleted,
   });
+
   const onSubmitValid = (data) => {
     if (loading) {
       return;
     }
+
     const { username, password } = getValues(); // getValues는 내가 form에 작성한 값들을 불러와 줌. input의 name 기준으로 추출
+
     login({
       variables: { username, password },
     });
   };
+
+  const clearLoginError = () => {
+    clearErrors('result'); // "result"는 위에서 설정했던 error의 이름
+  };
+
   return (
     <AuthLayout>
       <PageTitle title='Login' />
@@ -78,6 +100,7 @@ function Login() {
                 message: 'Username should be longer than 5 chars.',
               },
             })}
+            onChange={clearLoginError}
             name='username'
             type='text'
             placeholder='Username'
@@ -88,6 +111,7 @@ function Login() {
             ref={register({
               required: 'Password is required.',
             })}
+            onChange={clearLoginError}
             name='password'
             type='password'
             placeholder='Password'
