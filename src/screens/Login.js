@@ -5,6 +5,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useForm } from 'react-hook-form';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { logUserIn } from '../apollo';
 import AuthLayout from '../components/auth/AuthLayout';
@@ -25,6 +26,10 @@ const FacebookLogin = styled.div`
   }
 `;
 
+const Notification = styled.div`
+  color: #2ecc71;
+`;
+
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password) {
@@ -36,6 +41,8 @@ const LOGIN_MUTATION = gql`
 `;
 
 function Login() {
+  const location = useLocation();
+  console.log(location);
   const {
     register,
     handleSubmit,
@@ -46,6 +53,10 @@ function Login() {
     clearErrors, // clearErrors 는 모든 error들을 사라지게 만들거나 내가 선택한 error들을 없애줌
   } = useForm({
     mode: 'onChange',
+    defaultValues: {
+      username: location?.state?.username || '',
+      password: location?.state?.password || '',
+    },
   });
 
   const onCompleted = (data) => {
@@ -91,6 +102,7 @@ function Login() {
         <div>
           <FontAwesomeIcon icon={faInstagram} size='3x' />
         </div>
+        <Notification>{location?.state?.message}</Notification>
         <form onSubmit={handleSubmit(onSubmitValid)}>
           <Input
             ref={register({

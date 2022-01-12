@@ -12,7 +12,7 @@ export const logUserIn = (token) => {
 
 export const logUserOut = () => {
   localStorage.removeItem(TOKEN);
-  isLoggedInVar(false);
+  window.location.reload(); // 이전에 있던 모든 state들이 사라짐
 };
 
 export const darkModeVar = makeVar(false);
