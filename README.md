@@ -88,3 +88,10 @@ https://www.apollographql.com/docs/react/data/mutations/
 모르겠으면 GraphQL로 영화 웹 앱 만들기 #1 APOLLO GRAPHQL 파트에 #1.2 GET MOVIE QUERY(09:15) 8분 경 보기
 
 # 10.11
+
+# 10.12
+
+onSubmitValid에서 받는 data는 register된 input들의 name들의 value 집합들임.
+form이 valid하면 data로 이것들을 다 보내주기로 되어 있는 것임.
+
+data에 대한 console.log 결과 : 11:05분 (graphql에서 설정했던 mutation의 이름 : { 설정했던 리턴값 } 형식임)
