@@ -80,3 +80,9 @@ npm install react-hook-form@6.15.1
 # 10.9
 
 Apollo client를 통해 backend와 frontend를 연결함
+
+# 10.10
+
+https://www.apollographql.com/docs/react/data/mutations/
+
+모르겠으면 GraphQL로 영화 웹 앱 만들기 #1 APOLLO GRAPHQL 파트에 #1.2 GET MOVIE QUERY(09:15) 8분 경 보기

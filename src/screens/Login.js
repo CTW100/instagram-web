@@ -1,10 +1,11 @@
-import styled from 'styled-components';
+import { gql, useMutation } from '@apollo/client';
 import {
   faFacebookSquare,
   faInstagram,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
 import AuthLayout from '../components/auth/AuthLayout';
 import BottomBox from '../components/auth/BottomBox';
 import Button from '../components/auth/Button';
@@ -23,14 +24,44 @@ const FacebookLogin = styled.div`
   }
 `;
 
+const LOGIN_MUTATION = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      ok
+      token
+      error
+    }
+  }
+`;
+
 function Login() {
-  const { register, handleSubmit, errors, formState } = useForm({
-    mode: 'onChange',
+  const { register, handleSubmit, errors, formState, getValues, setError } =
+    useForm({
+      mode: 'onChange',
+    });
+  const onCompleted = (data) => {
+    const {
+      login: { ok, error, token },
+    } = data;
+    if (!ok) {
+      setError('result', {
+        message: error,
+      });
+    }
+  };
+  const [login, { loading }] = useMutation(LOGIN_MUTATION, {
+    // loading : mutation이 잘 전송됐는지 확인, data는 mutation 종료 이후에 Data가 있는지, called: mutation이 호출된 건지 여부 확인
+    onCompleted,
   });
   const onSubmitValid = (data) => {
-    // console.log(data);
+    if (loading) {
+      return;
+    }
+    const { username, password } = getValues(); // getValues는 내가 form에 작성한 값들을 불러와 줌. input의 name 기준으로 추출
+    login({
+      variables: { username, password },
+    });
   };
-
   return (
     <AuthLayout>
       <PageTitle title='Login' />
@@ -41,7 +72,7 @@ function Login() {
         <form onSubmit={handleSubmit(onSubmitValid)}>
           <Input
             ref={register({
-              required: 'Username is required.',
+              required: 'Username is required',
               minLength: {
                 value: 5,
                 message: 'Username should be longer than 5 chars.',
@@ -54,14 +85,21 @@ function Login() {
           />
           <FormError message={errors?.username?.message} />
           <Input
-            ref={register({ required: 'Password is required.' })}
+            ref={register({
+              required: 'Password is required.',
+            })}
             name='password'
             type='password'
             placeholder='Password'
             hasError={Boolean(errors?.password?.message)}
           />
           <FormError message={errors?.password?.message} />
-          <Button type='submit' value='Log in' disabled={!formState.isValid} />
+          <Button
+            type='submit'
+            value={loading ? 'Loading...' : 'Log in'}
+            disabled={!formState.isValid || loading}
+          />
+          <FormError message={errors?.result?.message} />
         </form>
         <Separator />
         <FacebookLogin>
@@ -77,5 +115,4 @@ function Login() {
     </AuthLayout>
   );
 }
-
 export default Login;
