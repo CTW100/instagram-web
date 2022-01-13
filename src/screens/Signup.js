@@ -1,7 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getValue } from '@testing-library/user-event/dist/utils';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
@@ -52,7 +51,7 @@ function SignUp() {
   const onCompleted = (data) => {
     const { username, password } = getValues();
     const {
-      createAccount: { ok, error },
+      createAccount: { ok },
     } = data;
     if (!ok) {
       return;
@@ -66,7 +65,7 @@ function SignUp() {
   const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, {
     onCompleted,
   });
-  const { register, handleSubmit, errors, formState, getValues } = useForm({
+  const { register, handleSubmit, formState, getValues } = useForm({
     mode: 'onChange',
   });
   const onSubmitValid = (data) => {
