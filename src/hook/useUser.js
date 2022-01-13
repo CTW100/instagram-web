@@ -5,6 +5,7 @@ import { isLoggedInVar, logUserOut } from '../apollo';
 const ME_QUERY = gql`
   query me {
     me {
+      id
       username
       avatar
     }
@@ -24,7 +25,7 @@ function useUser() {
       logUserOut(); // token 조작하면 로그아웃시킴
     }
   }, [data]);
-  return;
+  return { data };
 }
 
 export default useUser;
