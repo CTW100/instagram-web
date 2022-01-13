@@ -9,6 +9,8 @@ import { darkTheme, GlobalStyles, lightTheme } from './styles';
 import SignUp from './screens/Signup';
 import routes from './routes';
 import { HelmetProvider } from 'react-helmet-async';
+import Header from './components/Header';
+import Layout from './components/Layout';
 
 function App() {
   const isLoggedIn = useReactiveVar(isLoggedInVar); // 여기서 포인트는 이제 isLoggedInVar를 우리가 원하는 어디에서든지 바꿀 수 있다는 것. 그럼 isLoggedInVar가 바뀐다는 건 render를 다시 하도록 하는 시발점이 된다는 것
@@ -22,7 +24,13 @@ function App() {
           <Router>
             <Switch>
               <Route path={routes.home} exact>
-                {isLoggedIn ? <Home /> : <Login />}
+                {isLoggedIn ? (
+                  <Layout>
+                    <Home />
+                  </Layout>
+                ) : (
+                  <Login />
+                )}
               </Route>
               {!isLoggedIn ? (
                 <Route path={routes.signup}>
