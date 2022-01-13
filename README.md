@@ -95,3 +95,9 @@ onSubmitValid에서 받는 data는 register된 input들의 name들의 value 집�
 form이 valid하면 data로 이것들을 다 보내주기로 되어 있는 것임.
 
 data에 대한 console.log 결과 : 11:05분 (graphql에서 설정했던 mutation의 이름 : { 설정했던 리턴값 } 형식임)
+
+# 11.1
+
+backend 쪽에서도 수정사항 있음.
+
+token을 user가 마음대로 수정해도 우리의 apollo는 아직 token이 있는지의 여부만 확인하고 그 내용물을 믿어버리기 때문에 검사하는 코드가 필요함.
