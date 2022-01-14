@@ -111,3 +111,7 @@ me: null
 # 11.2
 
 자동로그아웃되는 이유 : LocalStorage에 token을 가지고 있지만 실제로는 token을 사용하고 있지 않은 것
+
+# 11.6
+
+Backend 쪽에 수정사항 있음. isLiked
