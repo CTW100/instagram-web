@@ -72,10 +72,33 @@ const Likes = styled(FatText)`
 `;
 
 function Photo({ id, user, file, isLiked, likes }) {
-  const [toggleLikeMutation, { loading }] = useMutation(TOGGLE_LIKE_MUTATION, {
+  const updateToggleLike = (cache, result) => {
+    // 첫번째 인자는 cache를 제어할 수 있는 link
+    const {
+      data: {
+        toggleLike: { ok },
+      },
+    } = result;
+    if (ok) {
+      cache.writeFragment({
+        // fragment를 write하는 건 cache에서 네가 원하는 특정 object의 일부분을 수정하는 것임
+        id: `Photo:${id}`,
+        fragment: gql`
+          fragment BSName on Photo {
+            isLiked
+          }
+        `,
+        data: {
+          isLiked: !isLiked,
+        },
+      });
+    }
+  };
+  const [toggleLikeMutation] = useMutation(TOGGLE_LIKE_MUTATION, {
     variables: {
       id,
     },
+    update: updateToggleLike,
   });
   return (
     <PhotoContainer key={id}>
@@ -121,3 +144,5 @@ Photo.propTypes = {
   likes: PropTypes.number.isRequired,
 };
 export default Photo;
+
+// update는 백엔드에서 받은 데이터를 주는 function이고 apollo cache에 직접 link해 줌
