@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const SAvatar = styled.div`
-  width: 25px;
-  height: 25px;
-  border-radiuse: 15px;
+  width: ${(props) => (props.lg ? '30px' : '25px')};
+  height: ${(props) => (props.lg ? '30px' : '25px')};
+  border-radiuse: 50%;
   background-color: #2c2c2c;
   overflow: hidden;
 `;
@@ -12,8 +12,9 @@ const Img = styled.img`
   max-width: 100%;
 `;
 
-function Avatar({ url = '' }) {
-  return <SAvatar>{url !== '' ? <Img src={url} /> : null}</SAvatar>;
+function Avatar({ url = '', lg = false }) {
+  // default값이 false
+  return <SAvatar lg={lg}>{url !== '' ? <Img src={url} /> : null}</SAvatar>;
 }
 
 export default Avatar;
